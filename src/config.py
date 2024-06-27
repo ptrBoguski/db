@@ -3,3 +3,4 @@ import os
 BOT_TOKEN = os.getenv("DISCORD_API_KEY")
 SYMBOL = "SOLUSDT"
 INTERVAL = "60"
+PERIOD = 14
