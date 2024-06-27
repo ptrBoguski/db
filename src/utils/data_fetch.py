@@ -4,7 +4,7 @@ import pandas as pd
 import ta
 from discord.ext import tasks
 from bot import bot
-from config import SYMBOL, INTERVAL
+from config import SYMBOL, INTERVAL, PERIOD
 from datetime import datetime, timedelta
 import sqlite3
 
@@ -43,7 +43,7 @@ async def fetch_and_analyze_rsi():
     interval = INTERVAL
     limit = 336
     end_time = int(time.time())
-    start_time = end_time - (14 * 24 * 60 * 60)
+    start_time = end_time - (PERIOD * 24 * 60 * 60)
 
     params = {
         "category": "spot",
