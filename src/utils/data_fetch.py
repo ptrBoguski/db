@@ -41,7 +41,7 @@ async def fetch_and_analyze_rsi():
     url = "https://api.bybit.com/v5/market/kline"
     symbol = SYMBOL
     interval = INTERVAL
-    limit = 336
+    limit = PERIOD * 24
     end_time = int(time.time())
     start_time = end_time - (PERIOD * 24 * 60 * 60)
 
@@ -69,10 +69,9 @@ async def fetch_and_analyze_rsi():
         if "retMsg" in data:
             print(f"Error message: {data['retMsg']}")
 
-    rsi = ta.momentum.RSIIndicator(df["close"], window=14).rsi()
+    rsi = ta.momentum.RSIIndicator(df["close"], window=limit).rsi()
     current_rsi = rsi.iloc[-1]
-    print(current_rsi)
-
+    print(rsi)
     channels = get_notification_channels()
     for channel_id in channels:
         channel = bot.get_channel(channel_id)
